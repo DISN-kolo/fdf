@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:13:03 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/10 16:38:28 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/10 17:10:49 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	circle_pixel_calc(int x, int y, double delta, double radius)
 				1080.f/2, 2.f)) - radius >= -delta));
 }
 
+int	ffgrad(int x, const int full)
+{
+	return ((int)(0xFF/(double)full*x));
+}
+
 int	main(void)
 {
 	void	*mlx;
@@ -50,7 +55,9 @@ int	main(void)
 		for (int j = 0; j < 1080; j++)
 			{
 				my_mlx_pixel_put(&img, i, j,
-						0x00FF0000 * circle_pixel_calc(i, j, 9, 200));
+						0x000000FF * circle_pixel_calc(i, j, 9, 200) +
+						0x00010000 * ffgrad(i, 1920) +
+						0x00000100 * ffgrad(j, 1080));
 			}
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
