@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_putstr_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/10 15:44:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/18 12:58:45 by akozin           ###   ########.fr       */
+/*   Created: 2024/01/19 13:05:25 by akozin            #+#    #+#             */
+/*   Updated: 2024/01/20 12:42:58 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#include "ft_printf.h"
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
+int	ft_putstr_p(char *s)
+{
+	int	l;
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-#endif
+	l = 0;
+	if (!s)
+		return (ft_putstr_p("(null)"));
+	while (*s)
+		l += ft_putchar_p(*s++);
+	return (l);
+}

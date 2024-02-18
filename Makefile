@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/10 15:27:58 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/18 13:35:21 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ MLX_A = $(addprefix $(MLX), libmlx.a)
 
 GNL = gnl/
 GNL_A = $(addprefix $(GNL), libgnl.a)
+
+FTPRINTF = ft_printf/
+FTPRINTF_A = $(addprefix $(FTPRINTF), libftprintf.a)
 
 NAME = fdf
 
@@ -33,8 +36,8 @@ RM = rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBFT_A) $(MLX_A) $(GNL_A)
-	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME):	$(OBJS) $(LIBFT_A) $(MLX_A) $(GNL_A) $(FTPRINTF_A)
+	$(CC) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(FTPRINTF) -lftprintf -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) -Imlx -MMD -MP -c -o $@ $<
@@ -48,17 +51,24 @@ $(MLX_A):
 $(GNL_A):
 	$(MAKE) -C $(GNL)
 
+$(FTPRINTF_A):
+	$(MAKE) -C $(FT_PRINTF)
+
 -include $(DFILES)
 
 clean:
 	$(MAKE) clean -C $(LIBFT)
 	$(MAKE) clean -C $(MLX)
 	$(MAKE) clean -C $(GNL)
+	$(MAKE) clean -C $(FTPRINTF)
 	$(RM) $(OBJS) $(DFILES)
 
-fclean:		clean
+fclean:	
 	$(MAKE) fclean -C $(LIBFT)
+	$(MAKE) clean -C $(MLX)
 	$(MAKE) fclean -C $(GNL)
+	$(MAKE) fclean -C $(FTPRINTF)
+	$(RM) $(OBJS) $(DFILES)
 	$(RM) $(NAME)
 
 re:			fclean all

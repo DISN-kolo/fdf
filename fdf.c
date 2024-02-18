@@ -6,13 +6,16 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:13:03 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/10 17:10:49 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/18 16:00:27 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "mlx/mlx.h"
+#include "ft_printf/ft_printf.h"
+#include "libft/libft.h"
 #include <math.h>
+#include <stdlib.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -40,15 +43,37 @@ int	ffgrad(int x, const int full)
 	return ((int)(0xFF/(double)full*x));
 }
 
+int	nclose(t_vars *param)
+{
+	ft_printf("quitting program on window closed\n");
+	mlx_destroy_window(param->mlx, param->win);
+	free(param->mlx);
+	exit(0);
+}
+
+int	mclose(int keycode, t_vars *param)
+{
+	ft_printf("keycode received: %d\n", keycode);
+	if (keycode == 53)
+	{
+		ft_printf("quitting program on escape pressed\n");
+		mlx_destroy_window(param->mlx, param->win);
+		free(param->mlx);
+		exit(0);
+	}
+	return (0);
+}
+
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
+	t_vars	vars;
 	t_data	img;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "sup people");
-	img.img = mlx_new_image(mlx, 1920, 1080);
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "sup people");
+	mlx_hook(vars.win, 2, 0, mclose, &vars);
+	mlx_hook(vars.win, 17, 0, nclose, &vars);
+	img.img = mlx_new_image(vars.mlx, 1920, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 			&img.line_length, &img.endian);
 	for (int i = 0; i < 1920; i++)
@@ -59,7 +84,7 @@ int	main(void)
 						0x00010000 * ffgrad(i, 1920) +
 						0x00000100 * ffgrad(j, 1080));
 			}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_loop(vars.mlx);
 	return (0);
 }

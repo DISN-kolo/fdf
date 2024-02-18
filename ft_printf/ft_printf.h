@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/10 15:44:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/18 12:58:45 by akozin           ###   ########.fr       */
+/*   Created: 2024/01/19 13:01:15 by akozin            #+#    #+#             */
+/*   Updated: 2024/01/20 16:06:43 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-typedef struct	s_vars {
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
+int	ft_putchar_p(char c);
+int	ft_putstr_p(char *s);
+int	ft_putunbr_p(unsigned int n);
+int	ft_putnbr_p(int n);
+int	ft_putptr_p(void *p);
+int	ft_putlhex_p(unsigned long long int n, int up);
+int	ft_puthex_p(unsigned int n, int up);
+int	ft_printf(const char *s, ...);
 
 #endif
