@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/18 13:35:21 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/18 16:10:43 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ $(GNL_A):
 	$(MAKE) -C $(GNL)
 
 $(FTPRINTF_A):
-	$(MAKE) -C $(FT_PRINTF)
+	$(MAKE) -C $(FTPRINTF)
 
 -include $(DFILES)
 
