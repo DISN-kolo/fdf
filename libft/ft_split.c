@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 13:11:30 by akozin            #+#    #+#             */
-/*   Updated: 2024/01/13 16:39:14 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/18 17:02:03 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_w(char c, char *set)
 	return (1);
 }
 */
-static int	wc(const char *s, char c)
+int	wc(const char *s, char c)
 {
 	int	i;
 	int	count;

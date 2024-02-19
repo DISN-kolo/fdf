@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:04:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/01/20 12:30:19 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:34:40 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_putunbr_p(unsigned int n)
 	if (c >= 10)
 		ft_putunbr_p(c / 10);
 	w = c % 10 + '0';
-	write(1, &w, 1);
+	write(2, &w, 1);
 	return (nlen);
 }
 /*

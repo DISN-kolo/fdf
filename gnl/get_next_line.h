@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 15:11:58 by akozin            #+#    #+#             */
-/*   Updated: 2024/01/29 12:50:36 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/19 12:23:28 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 100000
 # endif
 
 # include <stddef.h>

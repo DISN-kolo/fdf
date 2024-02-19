@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/18 16:10:43 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/19 18:27:17 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,15 @@ MAKE = make
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = fdf.c
+SRCNAMES = fdf.c \
+	   read_map.c \
+	   drawer.c \
+	   line_iterator.c \
+	   image_handler.c \
+	   keycode_handler.c \
+	   miscutils.c
+
+SRCS = $(addprefix src/, $(SRCNAMES))
 OBJS = $(SRCS:.c=.o)
 DFILES = $(SRCS:.c=.d)
 

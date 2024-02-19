@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:04:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/01/19 17:04:54 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:34:22 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ int	ft_putnbr_p(int n)
 	if (c < 0)
 	{
 		c *= -1;
-		write(1, "-", 1);
+		write(2, "-", 1);
 	}
 	if (c >= 10)
 		ft_putnbr_p(c / 10);
 	w = c % 10 + '0';
-	write(1, &w, 1);
+	write(2, &w, 1);
 	return (nlen);
 }
 /*

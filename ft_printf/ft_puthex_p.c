@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:04:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/01/20 16:07:31 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:34:12 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_puthex_p(unsigned int n, int up)
 		w = "0123456789ABCDEF"[n % 16];
 	else
 		w = "0123456789abcdef"[n % 16];
-	write(1, &w, 1);
+	write(2, &w, 1);
 	return (nlen);
 }
 /*
