@@ -26,7 +26,7 @@ NAME = fdf
 
 MAKE = make
 
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = fdf.c
 OBJS = $(SRCS:.c=.o)
@@ -37,7 +37,7 @@ RM = rm -f
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBFT_A) $(MLX_A) $(GNL_A) $(FTPRINTF_A)
-	$(CC) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(FTPRINTF) -lftprintf -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(FTPRINTF) -lftprintf -L$(MLX) -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) -Imlx -MMD -MP -c -o $@ $<
