@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:13:03 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/19 19:36:48 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 15:48:44 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	main(int argc, char **argv)
 	}
 	if (!fname_check(argv[1]))
 	{
-		ft_printf("File must exist and its name must end in .fdf\n");
+		ft_printf("File must be accessible and its name must end in .fdf\n");
 		return (1);
 	}
 	data_init(&data);
