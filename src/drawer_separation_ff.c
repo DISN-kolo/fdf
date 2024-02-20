@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi_hexonly.c                                  :+:      :+:    :+:   */
+/*   drawer_separation_ff.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/23 16:07:12 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 17:19:36 by akozin           ###   ########.fr       */
+/*   Created: 2024/02/20 19:22:06 by akozin            #+#    #+#             */
+/*   Updated: 2024/02/20 19:35:06 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_exit(int code, t_data *data);
+float	lerp(float begin, t_line l);
 
-int	ft_ax(char *str, t_data *data)
+int	ffdivider(int rrggbb, t_line l, float begin)
 {
-	int	res;
+	int	rr;
+	int	gg;
+	int	bb;
 
-	str += 2;
-	res = 0;
-	while (*str && *str != '\n')
-	{
-		res *= 16;
-		if (*str >= 'a' && *str <= 'f')
-			res += *str - 'a' + 10;
-		else if (*str >= '0' && *str <= '9')
-			res += *str - '0';
-		else
-			free_exit(1, data);
-		str++;
-	}
-	return (res);
+	rr = rrggbb / 0x010000;
+	gg = rrggbb / 0x0100 % 0x0100;
+	bb = rrggbb % 0x0100;
+	rr = rr * lerp(begin, l);
+	gg = gg * lerp(begin, l);
+	bb = bb * lerp(begin, l);
+	return (0x010000 * rr + 0x0100 * gg + 0x01 * bb);
 }

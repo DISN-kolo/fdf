@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/20 17:03:58 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/20 19:30:13 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ NAME = fdf
 MAKE = make
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 SRCNAMES = fdf.c \
 	   read_map.c \
 	   drawer.c \
@@ -35,7 +35,9 @@ SRCNAMES = fdf.c \
 	   image_handler.c \
 	   keycode_handler.c \
 	   miscutils.c \
-	   ft_atoi_hexonly.c
+	   ft_atoi_hexonly.c \
+	   drawer_utils.c \
+	   drawer_separation_ff.c
 
 SRCS = $(addprefix src/, $(SRCNAMES))
 OBJS = $(SRCS:.c=.o)

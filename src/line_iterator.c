@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:18:56 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 16:51:31 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 17:47:13 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	l_shifter(t_line *ret, t_data *data)
 }
 
 /* if it's not right, it's down */
-static t_line	l_filler(t_data *data, int x, int y, int right)
+t_line	l_filler(t_data *data, int x, int y, int right)
 {
 	t_line	ret;
 

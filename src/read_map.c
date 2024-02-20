@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:15:50 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 16:10:59 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:20:18 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 void	super_free(char ***templine);
 int		calc_width(char *filename, t_data *data);
 int		calc_height(char *filename, t_data *data);
-int		ft_atoi_hex(char *str, t_data *data);
+int		ft_ax(char *str, t_data *data);
 
 void	free_exit(int code, t_data *data)
 {
@@ -29,31 +29,34 @@ void	free_exit(int code, t_data *data)
 	exit(code);
 }
 
+void	data_colors_malloc(t_data *data, int j)
+{
+	data->colors[j] = (int *)malloc(sizeof (int) * data->width);
+	if (!data->colors[j])
+		free_exit(1, data);
+}
+
 void	line_atoi(char **templine, t_data *data, int j)
 {
 	int	i;
 
 	i = 0;
 	if (data->mapcolors)
-	{
-		data->colors[j] = (int *)malloc(sizeof (int) * data->width);
-		if (!data->colors[j])
-			free_exit(1, data);
-	}
+		data_colors_malloc(data, j);
 	while (i < data->width)
 	{
 		data->matrix[j][i] = ft_atoi(templine[i]);
 		if (data->matrix[j][i] > data->max)
 			data->max = data->matrix[j][i];
 		if (ft_strchr(templine[i], ','))
+		{
 			if (!data->mapcolors)
 			{
-				data->colors[j] = (int *)malloc(sizeof (int) * data->width);
-				if (!data->colors[j])
-					free_exit(1, data);
+				data_colors_malloc(data, j);
 				data->mapcolors = 1;
 			}
-			data->colors[j][i] = ft_atoi_hex(ft_strchr(templine[i], ',') + 1, data);
+			data->colors[j][i] = ft_ax(ft_strchr(templine[i], ',') + 1, data);
+		}
 		i++;
 	}
 }

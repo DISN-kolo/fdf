@@ -6,12 +6,18 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:45:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 17:03:31 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:34:41 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "../mlx/mlx.h"
+#include <stdio.h>
+
+t_line	l_filler(t_data *data, int x, int y, int right);
+float	step_setter(t_line l, float *max_abs, t_step *step);
+void	l_increase(t_line *l, t_step step);
+int		ffdivider(int rrggbb, t_line l, float begin);
 
 float	abs_float(float i)
 {
@@ -39,40 +45,31 @@ int	ffgrad(float param, float max)
 	return ((int)(0xff * param / max));
 }
 
-int	fflerp(t_data *data, t_line l, int start, int stop)
+float	lerp(float begin, t_line l)
 {
-	float	delta;
-
-	delta = data->matrix[l.y1ind][l.x1ind] - data->matrix[l.yind][l.xind];
-	if (delta < 0.000001 && delta > -0.000001)
-		return (stop);
-	return ((int)((l.z1 - l.z) / delta * (start - stop) + stop));
+	if (abs_float(l.x - l.x1) > abs_float(l.y - l.y1))
+		return (1 - (l.x1 - l.x) / (l.x1 - begin));
+	else
+		return (1 - (l.y1 - l.y) / (l.y1 - begin));
 }
 
 void	bresenham(t_line l, t_img *img, t_data *data)
 {
-	float	step_x;
-	float	step_y;
-	float	step_z;
+	t_step	step;
 	float	max_abs;
+	float	begin;
 
-	if (abs_float(l.x - l.x1) > abs_float(l.y - l.y1))
-		max_abs = abs_float(l.x - l.x1);
-	else
-		max_abs = abs_float(l.y - l.y1);
-	step_y = (l.y1 - l.y) / max_abs;
-	step_x = (l.x1 - l.x) / max_abs;
-	step_z = (l.z1 - l.z) / max_abs;
+	begin = step_setter(l, &max_abs, &step);
 	while ((int)(l.x - l.x1) || (int)(l.y - l.y1))
 	{
 		if (!data->mapcolors)
 			my_mlx_pixel_put(img, l.x, l.y, ffgrad(l.z, data->max) / 4
 				* 0x00020301 + 0x007f0000);
 		else
-			my_mlx_pixel_put(img, l.x, l.y, fflerp(data, l,
-				data->colors[l.yind][l.xind], data->colors[l.y1ind][l.x1ind]));
-		l.z += step_z;
-		l.x += step_x;
-		l.y += step_y;
+			my_mlx_pixel_put(img, l.x, l.y,
+				(ffdivider((data->colors[l.y1ind][l.x1ind]
+							- data->colors[l.yind][l.xind]), l, begin)
+					+ data->colors[l.yind][l.xind]));
+		l_increase(&l, step);
 	}
 }
