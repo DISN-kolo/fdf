@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/20 14:51:55 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/20 17:03:58 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCNAMES = fdf.c \
 	   line_iterator.c \
 	   image_handler.c \
 	   keycode_handler.c \
-	   miscutils.c
+	   miscutils.c \
+	   ft_atoi_hexonly.c
 
 SRCS = $(addprefix src/, $(SRCNAMES))
 OBJS = $(SRCS:.c=.o)

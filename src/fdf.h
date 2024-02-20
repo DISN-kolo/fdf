@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:44:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/19 15:42:39 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:48:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_data
 	int		height;
 	int		width;
 	int		**matrix;
+	int		**colors;
+	int		mapcolors;
 	int		max;
 	void	*mlx;
 	void	*win;
@@ -44,6 +46,10 @@ typedef struct s_line
 	float	y1;
 	float	z;
 	float	z1;
+	int		xind;
+	int		yind;
+	int		x1ind;
+	int		y1ind;
 }	t_line;
 
 #endif

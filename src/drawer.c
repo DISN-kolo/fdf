@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:45:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/19 15:50:39 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 17:03:31 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ int	ffgrad(float param, float max)
 	return ((int)(0xff * param / max));
 }
 
+int	fflerp(t_data *data, t_line l, int start, int stop)
+{
+	float	delta;
+
+	delta = data->matrix[l.y1ind][l.x1ind] - data->matrix[l.yind][l.xind];
+	if (delta < 0.000001 && delta > -0.000001)
+		return (stop);
+	return ((int)((l.z1 - l.z) / delta * (start - stop) + stop));
+}
+
 void	bresenham(t_line l, t_img *img, t_data *data)
 {
 	float	step_x;
@@ -55,8 +65,12 @@ void	bresenham(t_line l, t_img *img, t_data *data)
 	step_z = (l.z1 - l.z) / max_abs;
 	while ((int)(l.x - l.x1) || (int)(l.y - l.y1))
 	{
-		my_mlx_pixel_put(img, l.x, l.y, ffgrad(l.z, data->max) / 4
-			* 0x00020301 + 0x007f0000);
+		if (!data->mapcolors)
+			my_mlx_pixel_put(img, l.x, l.y, ffgrad(l.z, data->max) / 4
+				* 0x00020301 + 0x007f0000);
+		else
+			my_mlx_pixel_put(img, l.x, l.y, fflerp(data, l,
+				data->colors[l.yind][l.xind], data->colors[l.y1ind][l.x1ind]));
 		l.z += step_z;
 		l.x += step_x;
 		l.y += step_y;

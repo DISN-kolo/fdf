@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:13:03 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 15:48:44 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:07:25 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	data_init(t_data *data)
 {
 	data->vs = 1.2f;
 	data->max = 0;
+	data->mapcolors = 0;
 }
 
 void	data_init2(t_data *data)

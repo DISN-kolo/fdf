@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:18:56 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 15:25:30 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 16:51:31 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include <math.h>
 
 void	bresenham(t_line l, t_img *img, t_data *data);
+
+static void	l_shifter(t_line *ret, t_data *data)
+{
+	ret->x *= data->gscale;
+	ret->y *= data->gscale;
+	ret->x1 *= data->gscale;
+	ret->y1 *= data->gscale;
+	ret->x += data->xshift;
+	ret->y += data->yshift;
+	ret->x1 += data->xshift;
+	ret->y1 += data->yshift;
+}
 
 /* if it's not right, it's down */
 static t_line	l_filler(t_data *data, int x, int y, int right)
@@ -26,6 +38,8 @@ static t_line	l_filler(t_data *data, int x, int y, int right)
 		ret.y = (x + y) * sin(ANGLE) - data->matrix[y][x] * data->vs;
 		ret.x1 = (x + 1 - y) * cos(ANGLE);
 		ret.y1 = (x + 1 + y) * sin(ANGLE) - data->matrix[y][x + 1] * data->vs;
+		ret.x1ind = x + 1;
+		ret.y1ind = y;
 	}
 	else
 	{
@@ -33,15 +47,12 @@ static t_line	l_filler(t_data *data, int x, int y, int right)
 		ret.y = (x + y) * sin(ANGLE) - data->matrix[y][x] * data->vs;
 		ret.x1 = (x - y - 1) * cos(ANGLE);
 		ret.y1 = (x + y + 1) * sin(ANGLE) - data->matrix[y + 1][x] * data->vs;
+		ret.x1ind = x;
+		ret.y1ind = y + 1;
 	}
-	ret.x *= data->gscale;
-	ret.y *= data->gscale;
-	ret.x1 *= data->gscale;
-	ret.y1 *= data->gscale;
-	ret.x += data->xshift;
-	ret.y += data->yshift;
-	ret.x1 += data->xshift;
-	ret.y1 += data->yshift;
+	l_shifter(&ret, data);
+	ret.xind = x;
+	ret.yind = y;
 	return (ret);
 }
 
