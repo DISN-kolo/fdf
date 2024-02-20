@@ -22,11 +22,11 @@ void	*free_all(char *s1, char *s2)
 	return (NULL);
 }
 */
-static char	*ft_strjoin_free(char *b1, char *b2)
+static char	*gft_strjoin_free(char *b1, char *b2)
 {
 	char	*t;
 
-	t = ft_strjoin(b1, b2);
+	t = gft_strjoin(b1, b2);
 	free(b1);
 	return (t);
 }
@@ -47,7 +47,7 @@ static char	*get_remainder(char *buf)
 		free(buf);
 		return (NULL);
 	}
-	line = ft_calloc(ft_strlen(buf) - i + 1, 1);
+	line = gft_calloc(gft_strlen(buf) - i + 1, 1);
 	if (!line)
 		return (NULL);
 	i += 1;
@@ -68,7 +68,7 @@ static char	*extract_line(char *buf)
 		return (NULL);
 	while (buf[i] && buf[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, 1);
+	line = gft_calloc(i + 2, 1);
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -92,10 +92,10 @@ static char	*read_one(int fd, char *here)
 	int		r;
 
 	if (!here)
-		here = ft_calloc(1, 1);
+		here = gft_calloc(1, 1);
 	if (!here)
 		return (NULL);
-	buf_ro = ft_calloc(BUFFER_SIZE + 1, 1);
+	buf_ro = gft_calloc(BUFFER_SIZE + 1, 1);
 	if (!buf_ro)
 		return (NULL);
 	r = 1;
@@ -105,10 +105,10 @@ static char	*read_one(int fd, char *here)
 		if (r == -1)
 			return (free(buf_ro), free(here), NULL);
 		buf_ro[r] = '\0';
-		here = ft_strjoin_free(here, buf_ro);
+		here = gft_strjoin_free(here, buf_ro);
 		if (!here)
 			return (free(buf_ro), NULL);
-		if (ft_strchr(here, '\n'))
+		if (gft_strchr(here, '\n'))
 			break ;
 	}
 	free(buf_ro);

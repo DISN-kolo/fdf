@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-void	ft_bzero(void *s, size_t n)
+void	gft_bzero(void *s, size_t n)
 {
 	unsigned char	*sclone;
 
@@ -24,17 +24,17 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void	*gft_calloc(size_t count, size_t size)
 {
 	void	*ret;
 
 	ret = (void *)malloc(count * size);
 	if (ret)
-		ft_bzero(ret, count * size);
+		gft_bzero(ret, count * size);
 	return (ret);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	gft_strlen(const char *s)
 {
 	size_t	cur;
 
@@ -44,12 +44,12 @@ size_t	ft_strlen(const char *s)
 	return (cur);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*gft_strjoin(char const *s1, char const *s2)
 {
 	char		*ret;
 	char		*realret;
 
-	ret = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	ret = (char *)malloc(gft_strlen(s1) + gft_strlen(s2) + 1);
 	if (!ret)
 		return (NULL);
 	realret = ret;
@@ -61,7 +61,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (realret);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*gft_strchr(const char *s, int c)
 {
 	char	*retme;
 
