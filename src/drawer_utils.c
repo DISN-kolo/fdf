@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:54:03 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 19:18:12 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 20:35:10 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,25 @@
 
 float	abs_float(float i);
 
-float	step_setter(t_line l, float *max_abs, t_step *step)
+float	step_setter(t_line *l, float *max_abs, t_step *step)
 {
 	float	begin;
 
-	if (abs_float(l.x - l.x1) > abs_float(l.y - l.y1))
+	if (abs_float(l->x - l->x1) > abs_float(l->y - l->y1))
 	{
-		*max_abs = abs_float(l.x - l.x1);
-		begin = l.x;
+		*max_abs = abs_float(l->x - l->x1);
+		begin = l->x;
+		l->xused = 1;
 	}
 	else
 	{
-		*max_abs = abs_float(l.y - l.y1);
-		begin = l.y;
+		*max_abs = abs_float(l->y - l->y1);
+		begin = l->y;
+		l->xused = 0;
 	}
-	step->y = (l.y1 - l.y) / *max_abs;
-	step->x = (l.x1 - l.x) / *max_abs;
-	step->z = (l.z1 - l.z) / *max_abs;
+	step->y = (l->y1 - l->y) / *max_abs;
+	step->x = (l->x1 - l->x) / *max_abs;
+	step->z = (l->z1 - l->z) / *max_abs;
 	return (begin);
 }
 

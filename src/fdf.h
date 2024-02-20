@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:44:52 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 18:58:53 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 20:12:56 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_line
 	int		yind;
 	int		x1ind;
 	int		y1ind;
+	int		xused;
 }	t_line;
 typedef struct s_step
 {

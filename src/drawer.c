@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:45:17 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 19:34:41 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 20:54:03 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 
 t_line	l_filler(t_data *data, int x, int y, int right);
-float	step_setter(t_line l, float *max_abs, t_step *step);
+float	step_setter(t_line *l, float *max_abs, t_step *step);
 void	l_increase(t_line *l, t_step step);
 int		ffdivider(int rrggbb, t_line l, float begin);
 
@@ -45,21 +45,13 @@ int	ffgrad(float param, float max)
 	return ((int)(0xff * param / max));
 }
 
-float	lerp(float begin, t_line l)
-{
-	if (abs_float(l.x - l.x1) > abs_float(l.y - l.y1))
-		return (1 - (l.x1 - l.x) / (l.x1 - begin));
-	else
-		return (1 - (l.y1 - l.y) / (l.y1 - begin));
-}
-
 void	bresenham(t_line l, t_img *img, t_data *data)
 {
 	t_step	step;
 	float	max_abs;
 	float	begin;
 
-	begin = step_setter(l, &max_abs, &step);
+	begin = step_setter(&l, &max_abs, &step);
 	while ((int)(l.x - l.x1) || (int)(l.y - l.y1))
 	{
 		if (!data->mapcolors)
@@ -67,9 +59,9 @@ void	bresenham(t_line l, t_img *img, t_data *data)
 				* 0x00020301 + 0x007f0000);
 		else
 			my_mlx_pixel_put(img, l.x, l.y,
-				(ffdivider((data->colors[l.y1ind][l.x1ind]
-							- data->colors[l.yind][l.xind]), l, begin)
-					+ data->colors[l.yind][l.xind]));
+					data->colors[l.yind][l.xind] + ffdivider(
+						- data->colors[l.yind][l.xind]
+						+ data->colors[l.y1ind][l.x1ind], l, begin));
 		l_increase(&l, step);
 	}
 }

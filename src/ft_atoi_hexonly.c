@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 16:07:12 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 19:46:31 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 19:56:26 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_ax(char *str, t_data *data)
 		res *= 16;
 		if (*str >= 'a' && *str <= 'f')
 			res += *str - 'a' + 10;
-		if (*str >= 'A' && *str <= 'F')
+		else if (*str >= 'A' && *str <= 'F')
 			res += *str - 'A' + 10;
 		else if (*str >= '0' && *str <= '9')
 			res += *str - '0';
