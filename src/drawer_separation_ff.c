@@ -19,26 +19,42 @@ float	lerp(float begin, t_line l)
 	if (l.x1 == begin || l.y1 == begin)
 		return (0);
 	if (l.xused)
-		return (1 - (l.x1 - l.x) / (l.x1 - begin));
+		return ((l.x1 - l.x) / (l.x1 - begin));
 	else
-		return (1 - (l.y1 - l.y) / (l.y1 - begin));
+		return ((l.y1 - l.y) / (l.y1 - begin));
 }
 
-
-int	ffdivider(int rrggbb, t_line l, float begin)
+t_rgb	int_to_rgb(int i)
 {
-	int	sgn;
-	int	rr;
-	int	gg;
-	int	bb;
+	t_rgb	col;
 
-	sgn = 2*(rrggbb >= 0) - 1;
-	rrggbb *= sgn;
-	rr = rrggbb / 0x010000;
-	gg = rrggbb / 0x0100 % 0x0100;
-	bb = rrggbb % 0x0100;
-	rr = rr * lerp(begin, l);
-	gg = gg * lerp(begin, l);
-	bb = bb * lerp(begin, l);
-	return (sgn*(0x010000 * rr + 0x0100 * gg + 0x01 * bb));
+	col.r = i / 0x010000;
+	col.g = i / 0x0100 % 0x0100;
+	col.b = i % 0x0100;
+	return (col);
+}
+
+int	rgb_to_int(t_rgb col)
+{
+	return (col.r * 0x010000 + col.g * 0x0100 + col.b * 0x01);
+}
+
+int	ffdivider(t_data *data, t_line l, float begin)
+{
+	t_rgb	oc;
+	t_rgb	nc;
+	t_rgb	rc;
+
+	oc = int_to_rgb(data->colors[l.yind][l.xind]);
+	nc = int_to_rgb(data->colors[l.y1ind][l.x1ind]);
+	oc.r *= lerp(begin, l);
+	oc.g *= lerp(begin, l);
+	oc.b *= lerp(begin, l);
+	nc.r *= 1 - lerp(begin, l);
+	nc.g *= 1 - lerp(begin, l);
+	nc.b *= 1 - lerp(begin, l);
+	rc.r = oc.r + nc.r;
+	rc.g = oc.g + nc.g;
+	rc.b = oc.b + nc.b;
+	return (rgb_to_int(rc));
 }

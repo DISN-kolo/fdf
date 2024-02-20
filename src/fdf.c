@@ -64,7 +64,7 @@ void	data_init(t_data *data)
 
 void	data_init2(t_data *data)
 {
-	data->gscale = 1080 / ((data->width + data->height) * cos(ANGLE));
+	data->gscale = 4*1080 / ((data->width + data->height) * cos(ANGLE));
 	data->xshift = 1920 / 2;
 	data->yshift = 1080 / 2 - 200;
 	data->mlx = mlx_init();

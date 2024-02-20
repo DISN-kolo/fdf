@@ -17,7 +17,7 @@
 t_line	l_filler(t_data *data, int x, int y, int right);
 float	step_setter(t_line *l, float *max_abs, t_step *step);
 void	l_increase(t_line *l, t_step step);
-int		ffdivider(int rrggbb, t_line l, float begin);
+int		ffdivider(t_data *data, t_line l, float begin);
 
 float	abs_float(float i)
 {
@@ -56,12 +56,9 @@ void	bresenham(t_line l, t_img *img, t_data *data)
 	{
 		if (!data->mapcolors)
 			my_mlx_pixel_put(img, l.x, l.y, ffgrad(l.z, data->max) / 4
-				* 0x00020301 + 0x007f0000);
+				* 0x020301 + 0x7f0000);
 		else
-			my_mlx_pixel_put(img, l.x, l.y,
-					data->colors[l.yind][l.xind] + ffdivider(
-						- data->colors[l.yind][l.xind]
-						+ data->colors[l.y1ind][l.x1ind], l, begin));
+			my_mlx_pixel_put(img, l.x, l.y, ffdivider(data, l, begin));
 		l_increase(&l, step);
 	}
 }

@@ -12,7 +12,7 @@
 
 #ifndef FDF_H
 # define FDF_H
-# define ANGLE 0.5
+# define ANGLE 0.2
 
 typedef struct s_img
 {
@@ -58,5 +58,11 @@ typedef struct s_step
 	float	y;
 	float	z;
 }	t_step;
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
 #endif
