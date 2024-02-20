@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:15:50 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/19 18:06:03 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 15:24:42 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include "../gnl/get_next_line.h"
 
 void	super_free(char ***templine);
-int		calc_width(char *filename);
-int		calc_height(char *filename);
+int		calc_width(char *filename, t_data *data);
+int		calc_height(char *filename, t_data *data);
 
 void	free_exit(int code, t_data *data)
 {
@@ -42,9 +42,9 @@ void	line_atoi(char **templine, t_data *data, int j)
 
 void	yet_another_data_init(t_data *data, char *filename)
 {
-	data->height = calc_height(filename);
-	data->width = calc_width(filename);
-	data->matrix = (int **)malloc((data->height + 1) * sizeof (int *));
+	data->height = calc_height(filename, data);
+	data->width = calc_width(filename, data);
+	data->matrix = (int **)malloc(data->height * sizeof (int *));
 	if (data->matrix == NULL)
 		exit(1);
 }
@@ -59,6 +59,8 @@ void	read_map(char *filename, t_data *data)
 	yet_another_data_init(data, filename);
 	j = 0;
 	fd = open(filename, O_RDONLY);
+	if (!fd)
+		free_exit(1, data);
 	while (j < data->height)
 	{
 		data->matrix[j] = (int *)malloc((data->width + 1) * sizeof (int));

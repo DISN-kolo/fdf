@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/19 18:27:17 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/20 14:51:55 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ all:		$(NAME)
 $(NAME):	$(OBJS) $(LIBFT_A) $(MLX_A) $(GNL_A) $(FTPRINTF_A)
 	$(CC) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(FTPRINTF) -lftprintf -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-.c.o:
+$(OBJS): %.o: %.c Makefile
 	$(CC) $(CFLAGS) -Imlx -MMD -MP -c -o $@ $<
 
 $(LIBFT_A):

@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:39:54 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/19 18:26:40 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/20 15:23:41 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 #include <fcntl.h>
 #include "../gnl/get_next_line.h"
 #include "../libft/libft.h"
+#include "fdf.h"
 
 int		wc(const char *s, char c);
+void	free_exit(int code, t_data *data);
 
 // this file is mostly for read_map.c
 void	super_free(char ***templine)
@@ -28,21 +30,36 @@ void	super_free(char ***templine)
 	free((*templine));
 }
 
-int	calc_width(char *filename)
+int	calc_width(char *filename, t_data *data)
 {
 	int		fd;
 	char	*line;
 	int		ret;
 
 	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		free_exit(1, data);
 	line = get_next_line(fd);
+	if (line)
+		ret = wc(line, ' ');
+	else
+	{
+		close(fd);
+		free_exit(1, data);
+	}
+	while (line)
+	{
+		if (line)
+			free(line);
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
 	close(fd);
-	ret = wc(line, ' ');
-	free(line);
 	return (ret);
 }
 
-int	calc_height(char *filename)
+int	calc_height(char *filename, t_data *data)
 {
 	int		fd;
 	int		lines;
@@ -50,14 +67,18 @@ int	calc_height(char *filename)
 
 	lines = 0;
 	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		free_exit(1, data);
 	line = get_next_line(fd);
 	while (line)
 	{
-		free(line);
+		if (line)
+			free(line);
 		lines++;
 		line = get_next_line(fd);
 	}
-	free(line);
+	if (line)
+		free(line);
 	close(fd);
 	return (lines);
 }
