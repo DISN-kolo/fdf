@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/20 19:30:13 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/21 12:44:50 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ NAME = fdf
 MAKE = make
 
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCNAMES = fdf.c \
 	   read_map.c \
 	   drawer.c \

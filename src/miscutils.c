@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 17:39:54 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 15:23:41 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/21 12:35:49 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,27 @@
 #include "../libft/libft.h"
 #include "fdf.h"
 
-int		wc(const char *s, char c);
 void	free_exit(int code, t_data *data);
+
+int	fdf_wc(const char *s, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (!s[i] || s[i] == '\n')
+		return (0);
+	if (s[i++] != c)
+		count++;
+	while (s[i] && s[i] != '\n')
+	{
+		if (s[i] != c && s[i - 1] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
 
 // this file is mostly for read_map.c
 void	super_free(char ***templine)
@@ -41,7 +60,7 @@ int	calc_width(char *filename, t_data *data)
 		free_exit(1, data);
 	line = get_next_line(fd);
 	if (line)
-		ret = wc(line, ' ');
+		ret = fdf_wc(line, ' ');
 	else
 	{
 		close(fd);
