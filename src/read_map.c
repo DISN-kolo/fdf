@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:15:50 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/21 12:24:22 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/21 12:29:23 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	read_map(char *filename, t_data *data)
 		free_exit(1, data);
 	while (j < data->height)
 	{
-		data->matrix[j] = (int *)malloc((data->width + 1) * sizeof (int));
+		data->matrix[j] = (int *)malloc((data->width) * sizeof (int));
 		if (data->matrix[j] == NULL)
 		{
 			close(fd);
