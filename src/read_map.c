@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 16:15:50 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 19:50:02 by akozin           ###   ########.fr       */
+/*   Updated: 2024/02/21 12:24:22 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	read_map(char *filename, t_data *data)
 	yet_another_data_init(data, filename);
 	j = 0;
 	fd = open(filename, O_RDONLY);
-	if (!fd)
+	if (fd == -1)
 		free_exit(1, data);
 	while (j < data->height)
 	{
