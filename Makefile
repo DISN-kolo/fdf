@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/22 16:42:50 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/22 18:35:49 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ DFILES = $(SRCS:.c=.d)
 
 RM = rm -f
 
-all:		$(NAME) make_libs
+all:		make_libs $(NAME)
 
 make_libs:
 	$(MAKE) -C $(LIBFT)
