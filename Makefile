@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/22 13:02:59 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/22 16:42:50 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,25 +45,20 @@ DFILES = $(SRCS:.c=.d)
 
 RM = rm -f
 
-all:		$(NAME)
+all:		$(NAME) make_libs
+
+make_libs:
+	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(MLX)
+	$(MAKE) -C $(GNL)
+	$(MAKE) -C $(FTPRINTF)
+
 
 $(NAME):	$(OBJS) $(LIBFT_A) $(MLX_A) $(GNL_A) $(FTPRINTF_A)
 	$(CC) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(FTPRINTF) -lftprintf -L$(MLX) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 $(OBJS): %.o: %.c Makefile
 	$(CC) $(CFLAGS) -Imlx -MMD -MP -c -o $@ $<
-
-$(LIBFT_A):
-	$(MAKE) -C $(LIBFT)
-
-$(MLX_A):
-	$(MAKE) -C $(MLX)
-
-$(GNL_A):
-	$(MAKE) -C $(GNL)
-
-$(FTPRINTF_A):
-	$(MAKE) -C $(FTPRINTF)
 
 -include $(DFILES)
 
