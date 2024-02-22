@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/21 12:44:50 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/22 13:02:59 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,4 +84,4 @@ fclean:
 
 re:			fclean all
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re
