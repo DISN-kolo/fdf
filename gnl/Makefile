@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 11:52:48 by akozin            #+#    #+#              #
-#    Updated: 2024/02/10 15:01:25 by akozin           ###   ########.fr        #
+#    Updated: 2024/02/26 14:47:05 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ all: $(NAME)
 $(NAME): $(OFILES)
 	ar rcs $(NAME) $(OFILES)
 
-$(OFILES): %.o: %.c
+$(OFILES): %.o: %.c Makefile
 	$(CC) $(CFLAGS) -MMD -MP -c -o $@ $<
 
 -include $(DFILES)
