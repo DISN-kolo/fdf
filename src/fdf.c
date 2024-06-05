@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/10 15:13:03 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/20 16:07:25 by akozin           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:20:40 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	mclose(int keycode, t_data *data)
 	int	y;
 
 	y = 0;
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		mlx_destroy_window(data->mlx, data->win);
 		while (y < data->height)
@@ -64,7 +64,7 @@ void	data_init(t_data *data)
 
 void	data_init2(t_data *data)
 {
-	data->gscale = 4*1080 / ((data->width + data->height) * cos(ANGLE));
+	data->gscale = 4 * 1080 / ((data->width + data->height) * cos(ANGLE));
 	data->xshift = 1920 / 2;
 	data->yshift = 1080 / 2 - 200;
 	data->mlx = mlx_init();
@@ -88,7 +88,7 @@ int	main(int argc, char **argv)
 	data_init(&data);
 	read_map(argv[1], &data);
 	data_init2(&data);
-	mlx_hook(data.win, 2, 0, mclose, &data);
+	mlx_hook(data.win, 2, 1L << 0, mclose, &data);
 	mlx_hook(data.win, 17, 0, nclose, &data);
 	data.img.img = mlx_new_image(data.mlx, 1920, 1080);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,

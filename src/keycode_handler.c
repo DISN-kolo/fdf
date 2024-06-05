@@ -6,7 +6,7 @@
 /*   By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 16:02:13 by akozin            #+#    #+#             */
-/*   Updated: 2024/02/19 16:19:35 by akozin           ###   ########.fr       */
+/*   Updated: 2024/06/05 15:20:59 by akozin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,30 @@ void	image_redraw(t_data *data, t_img *img);
 //  0 = zoom
 //  1 = pan
 // -1 = wrong :)
+/* upp keycode is 65362
+down keycode is 65364
+left keycode is 65361
+right keycode is 65363
+*/
 int	keycode_type(int keycode)
 {
-	if (keycode == 12 || keycode == 13 || keycode == 0 || keycode == 1)
+	if (keycode == 113 || keycode == 119 || keycode == 97 || keycode == 115)
 		return (0);
-	if (keycode == 123 || keycode == 124 || keycode == 125 || keycode == 126)
+	if (keycode == 65362 || keycode == 65364
+		|| keycode == 65361 || keycode == 65363)
 		return (1);
 	return (-1);
 }
 
 void	handle_zoom(int keycode, t_data *data)
 {
-	if (keycode == 12)
+	if (keycode == 113)
 		data->vs += 0.02f;
-	if (keycode == 13)
+	if (keycode == 119)
 		data->vs -= 0.02f;
-	if (keycode == 0)
+	if (keycode == 97)
 		data->gscale += 2.f;
-	if (keycode == 1)
+	if (keycode == 115)
 	{
 		data->gscale -= 2.f;
 		if (data->gscale < 2)
@@ -44,14 +50,14 @@ void	handle_zoom(int keycode, t_data *data)
 
 void	handle_pan(int keycode, t_data *data)
 {
-	if (keycode == 123)
-		data->xshift += 100;
-	if (keycode == 124)
+	if (keycode == 65363)
 		data->xshift -= 100;
-	if (keycode == 125)
-		data->yshift -= 100;
-	if (keycode == 126)
+	if (keycode == 65361)
+		data->xshift += 100;
+	if (keycode == 65362)
 		data->yshift += 100;
+	if (keycode == 65364)
+		data->yshift -= 100;
 }
 
 void	keycode_handler(int keycode, t_data *data)
