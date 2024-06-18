@@ -6,7 +6,7 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/10 13:41:10 by akozin            #+#    #+#              #
-#    Updated: 2024/02/20 19:30:13 by akozin           ###   ########.fr        #
+#    Updated: 2024/06/18 16:39:40 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ NAME = fdf
 
 MAKE = make
 
-CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
 SRCNAMES = fdf.c \
 	   read_map.c \
 	   drawer.c \
@@ -45,25 +45,19 @@ DFILES = $(SRCS:.c=.d)
 
 RM = rm -f
 
-all:		$(NAME)
+all:		make_libs $(NAME)
+
+make_libs:
+	$(MAKE) -C $(LIBFT)
+	$(MAKE) -C $(MLX)
+	$(MAKE) -C $(GNL)
+	$(MAKE) -C $(FTPRINTF)
 
 $(NAME):	$(OBJS) $(LIBFT_A) $(MLX_A) $(GNL_A) $(FTPRINTF_A)
 	$(CC) $(OBJS) -L$(LIBFT) -lft -L$(GNL) -lgnl -L$(FTPRINTF) -lftprintf -L$(MLX) -lmlx -lXext -lX11 -lm -lz -o $(NAME)
 
 $(OBJS): %.o: %.c Makefile
 	$(CC) $(CFLAGS) -Imlx -MMD -MP -c -o $@ $<
-
-$(LIBFT_A):
-	$(MAKE) -C $(LIBFT)
-
-$(MLX_A):
-	$(MAKE) -C $(MLX)
-
-$(GNL_A):
-	$(MAKE) -C $(GNL)
-
-$(FTPRINTF_A):
-	$(MAKE) -C $(FTPRINTF)
 
 -include $(DFILES)
 

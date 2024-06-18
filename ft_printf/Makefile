@@ -6,14 +6,14 @@
 #    By: akozin <akozin@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/19 12:24:31 by akozin            #+#    #+#              #
-#    Updated: 2024/01/20 16:08:10 by akozin           ###   ########.fr        #
+#    Updated: 2024/06/18 16:40:31 by akozin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 RM = rm -f
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fPIE
 CFILES = ft_printf.c ft_putchar_p.c ft_putlhex_p.c ft_putnbr_p.c \
 		 ft_putptr_p.c ft_putstr_p.c ft_putunbr_p.c ft_puthex_p.c
 OFILES = $(CFILES:.c=.o)
